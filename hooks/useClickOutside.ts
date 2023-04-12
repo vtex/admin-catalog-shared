@@ -34,5 +34,3 @@ export function useClickOutside(ref: React.RefObject<HTMLElement>) {
 
   return { visible, setVisible, handleExceptionClick }
 }
-
-console.log('XD')
