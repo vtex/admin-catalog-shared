@@ -4,9 +4,9 @@ import {
   ComboboxPopover,
   useComboboxStore,
 } from '@ariakit/react'
-import { AnyObject, Box, csx } from '@vtex/admin-ui'
+import { AnyObject, Box, Flex, IconPlus, Text, csx } from '@vtex/admin-ui'
 import { FormState } from '@vtex/admin-ui-form'
-import { ReactNode, useState } from 'react'
+import { ReactNode, useMemo, useState } from 'react'
 import * as styles from './Combobox.styles'
 
 type ComboboxProps = {
@@ -22,14 +22,31 @@ type ComboboxProps = {
   getOptionValue?: (item: AnyObject) => string
   renderOption?: (item: AnyObject) => ReactNode
   isLoading?: boolean
+  creatable?: boolean
 }
 
 export const Combobox = (props: ComboboxProps) => {
-  const { list, label, name, state, placeholder } = props
+  const { list, label, name, state, placeholder, creatable = false } = props
 
-  const [filteredList, setFilteredList] = useState(list)
+  const [searchValue, setSearchValue] = useState('')
+
+  const filteredList = useMemo(
+    () =>
+      searchValue
+        ? list.filter((item) => item.label.toLowerCase().includes(searchValue))
+        : list,
+    [list, searchValue]
+  )
 
   const combobox = useComboboxStore({ gutter: 4, sameWidth: true })
+
+  const handleCreate = () => {
+    state.setValue(name, searchValue)
+    combobox.setValue(searchValue)
+    combobox.setOpen(false)
+  }
+
+  const shouldShowCreate = creatable && !!searchValue
 
   return (
     <Box csx={styles.wrapper}>
@@ -41,16 +58,13 @@ export const Combobox = (props: ComboboxProps) => {
         store={combobox}
         placeholder={placeholder}
         className={csx(styles.combobox)}
-        onChange={(evt) =>
-          setFilteredList(
-            list.filter((item) =>
-              item.label.toLowerCase().includes(evt.target.value.toLowerCase())
-            )
-          )
-        }
+        onChange={(evt) => setSearchValue(evt.target.value)}
       />
 
       <ComboboxPopover store={combobox} className={csx(styles.popover)}>
+        <Text variant="detail" tone="secondary" csx={{ padding: '8px 16px' }}>
+          Select a {label.toLocaleLowerCase()} {creatable && 'or create one'}
+        </Text>
         {filteredList.map((item) => (
           <ComboboxItem
             key={item.value}
@@ -61,6 +75,33 @@ export const Combobox = (props: ComboboxProps) => {
             {item.label}
           </ComboboxItem>
         ))}
+        {shouldShowCreate && (
+          <button
+            type="button"
+            onClick={handleCreate}
+            style={{
+              appearance: 'none',
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+            }}
+          >
+            <Flex
+              align={'center'}
+              csx={{
+                gap: '8px',
+                height: '36px',
+                padding: '0 12px',
+                borderTop: '1px solid #DDDDDD',
+              }}
+            >
+              <IconPlus />
+              <Text variant="detail" tone="secondary">
+                Create <strong>{searchValue}</strong>
+              </Text>
+            </Flex>
+          </button>
+        )}
       </ComboboxPopover>
     </Box>
   )
