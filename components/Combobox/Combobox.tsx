@@ -62,7 +62,7 @@ export const Combobox = (props: ComboboxProps) => {
       />
 
       <ComboboxPopover store={combobox} className={csx(styles.popover)}>
-        <Text variant="detail" tone="secondary" csx={{ padding: '8px 16px' }}>
+        <Text variant="detail" tone="secondary" csx={{ padding: '9.5px 24px' }}>
           Select a {label.toLocaleLowerCase()} {creatable && 'or create one'}
         </Text>
         {filteredList.map((item) => (
@@ -84,6 +84,7 @@ export const Combobox = (props: ComboboxProps) => {
               background: 'none',
               border: 'none',
               cursor: 'pointer',
+              padding: '0',
             }}
           >
             <Flex
@@ -91,7 +92,7 @@ export const Combobox = (props: ComboboxProps) => {
               csx={{
                 gap: '8px',
                 height: '36px',
-                padding: '0 12px',
+                padding: '18px 24px',
                 borderTop: '1px solid #DDDDDD',
               }}
             >

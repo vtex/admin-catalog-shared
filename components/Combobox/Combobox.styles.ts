@@ -43,7 +43,7 @@ export const popover = style({
   borderStyle: 'solid',
   borderColor: 'hsl(204 20% 88%)',
   backgroundColor: 'hsl(204 20% 100%)',
-  padding: '0.5rem',
+  padding: '0',
   color: 'hsl(204 10% 10%)',
   outline: '2px solid transparent',
   outlineOffset: '2px',
@@ -56,7 +56,7 @@ export const comboboxItem = style({
   alignItems: 'center',
   gap: '0.5rem',
   borderRadius: '0.25rem',
-  padding: '0.5rem',
+  padding: '9.5px 24px',
   outline: 'none !important',
 
   ':hover': {
