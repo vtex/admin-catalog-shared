@@ -27,6 +27,24 @@ export const combobox = style({
     border: '1px solid rgb(59, 59, 59)',
     boxShadow: 'var(--admin-ui-shadow-ring-neutral)',
   },
+  input: {
+    flex: 'auto',
+    outline: 'none',
+  },
+})
+
+export const selected = style({
+  padding: '4px 8px',
+  background: 'rgba(0, 0, 0, 0.05)',
+  borderRadius: '4px',
+  alignItems: 'center',
+  alignSelf: 'center',
+  gap: '8px',
+  button: {
+    cursor: 'pointer',
+    height: '20px',
+    width: '20px',
+  },
 })
 
 export const popover = style({
@@ -34,10 +52,8 @@ export const popover = style({
   position: 'relative',
   zIndex: '50',
   display: 'flex',
-  maxHeight: ' 300px',
+  maxHeight: '320px',
   flexDirection: 'column',
-  overflow: 'auto',
-  overscrollBehavior: 'contain',
   borderRadius: '0.5rem',
   borderWidth: '1px',
   borderStyle: 'solid',
@@ -51,18 +67,37 @@ export const popover = style({
 
 export const comboboxItem = style({
   display: 'flex',
-  cursor: 'default',
+  cursor: 'pointer',
   scrollMargin: '0.5rem',
   alignItems: 'center',
   gap: '0.5rem',
   borderRadius: '0.25rem',
   padding: '9.5px 24px',
   outline: 'none !important',
-
   ':hover': {
     backgroundColor: 'rgba(0, 0, 0, 0.05)',
   },
   '&[data-active-item]': {
     backgroundColor: 'rgba(0, 0, 0, 0.05)',
   },
+})
+
+export const createItem = style({
+  appearance: 'none',
+  background: 'none',
+  border: 'none',
+  cursor: 'pointer',
+  padding: '0',
+  ':hover': {
+    backgroundColor: 'rgba(0, 0, 0, 0.05)',
+  },
+  '&[data-active-item]': {
+    backgroundColor: 'rgba(0, 0, 0, 0.05)',
+  },
+})
+
+export const scrollable = style({
+  height: '100%',
+  overflow: 'auto',
+  overscrollBehavior: 'contain',
 })
