@@ -1,0 +1,9 @@
+{
+  "name": "admin-catalog-shared",
+  "version": "0.0.1",
+  "description": "Component library shared over catalog",
+  "main": "components/index.ts",
+  "repository": "git@github.com:vtex/admin-catalog-shared.git",
+  "author": "VTEX",
+  "private": true
+}
